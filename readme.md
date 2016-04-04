@@ -83,34 +83,9 @@ _In case of if apache > 2.4 please use below configuration_
 ##### Go to project directory.
 - `sudo nano .env`
 
- _Add following configuration_
-    
-    APP_ENV=local
-    APP_DEBUG=true
-    APP_KEY=base64:aub+Jg1OfZ8FKLV/FL7zbYFx0abmMkl1wU3UC0h3XEE=
-    APP_URL=http://localhost
-    
-    DB_CONNECTION=mysql
-    DB_HOST=localhost
-    DB_PORT=3306
-    DB_DATABASE=dbname
-    DB_USERNAME=dbuser
-    DB_PASSWORD=dbpassword
-    
-    CACHE_DRIVER=file
-    SESSION_DRIVER=file
-    QUEUE_DRIVER=sync
-    
-    REDIS_HOST=127.0.0.1
-    REDIS_PASSWORD=null
-    REDIS_PORT=6379
-    
-    MAIL_DRIVER=smtp
-    MAIL_HOST=mailtrap.io
-    MAIL_PORT=2525
-    MAIL_USERNAME=null
-    MAIL_PASSWORD=null
-    MAIL_ENCRYPTION=null
+ _And copy .env.example sample content and paste into .env file and change some configuration as you wanted._
+ _ then run command : sudo chmod -R 777 .env_
+ _then run command: php artisan key:generate_
     
 _Then cd into project direcoty and run the below command_
 - `php artisan migrate`    
