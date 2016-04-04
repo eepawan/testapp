@@ -30,7 +30,7 @@ class UserFollower extends Model
      * @return mixed
      */
     public function getFollowingOrNot($follower_id,$user_id){
-        return DB::table('user_followers')->where('follower_id','=', $follower_id)->where('user_id','=', $user_id)->count();
+        return DB::table('user_followers')->where('follower_id','=', $user_id)->where('user_id','=', $follower_id)->count();
     }
 
     /**
