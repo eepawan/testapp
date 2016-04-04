@@ -42,6 +42,11 @@ class HomeController extends Controller
         return view('home',['userinfo'=>$userInfoArray]);
     }
 
+    /**
+     * Adding follower functionality
+     * @param Request $request
+     * @return array
+     */
     public function follow(Request $request){
         $userInfo = \Auth::user();
         $data = $request->all();

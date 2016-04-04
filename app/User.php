@@ -30,6 +30,11 @@ class User extends Authenticatable
         return $this->hasMany('App\UserFollower');
     }
 
+    /**
+     * Getting all user listing other than current user
+     * @param $user_id
+     * @return mixed
+     */
     public function getAllUser($user_id)
     {
         return DB::table('users')->where('id','!=', $user_id)->select('id','name')->get();

@@ -1,27 +1,125 @@
-# Laravel PHP Framework
+# TestApp
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+_Test app is a assingment.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+## Setup
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+### System requirement
+- Ubuntu 15.10
+- Php version 5.6
+- Apache any current version
+- Mysql any current version
 
-## Official Documentation
+### Install system dependencies
+-  `sudo apt-get update`
+- `sudo apt-get install curl libc6 libcurl3 zlib1g apache2 php5 git libcurl3-dev php5-mcrypt php5-curl`
+- `curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer`
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+### Mysql
 
-## Contributing
+- `sudo apt-get install mysql-server php5-mysql`
+- `mysql -uroot -p`
+ _Enter password._
+- `create DATABASE dbname;`
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+### Creating Project
+_Now go to  https://github.com/phpmysqlexpert/testapp and download the zip file. unzip the file.
 
-## Security Vulnerabilities
+_Go to project path and run the following command.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+- `sudo chmod -R 777 public/ storage/ bootstrap/`
+ 
+- `composer install --no-scripts`
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+### Apache configuration
+- `cd  /etc/apache2/sites-available/`
+- `sudo nano 000-default.conf`
+
+ _Change:_
+ 
+> DocumentRoot /var/www/html 
+
+ _To_
+ 
+>  DocumentRoot /project path/public
+ 
+ _Add following lines after DocumentRoot_
+ 
+>           <Directory /project path/public>
+
+>             AllowOverride All
+
+>             Order Allow,Deny
+
+>             Allow from all
+
+>             Require all granted
+
+>            </Directory>
+
+_In case of if apache > 2.4 please use below configuration_
+
+>           <Directory /project path/public>
+
+>             DirectoryIndex index.php
+
+>             AllowOverride All
+
+>             Require all granted
+
+>            </Directory>
+          
+
+
+- `sudo a2dissite 000-default.conf`
+- `sudo a2ensite 000-default.conf`
+- `sudo a2enmod rewrite`
+-  `sudo service apache2 restart`
+
+
+
+### Environment setup
+##### Go to project directory.
+- `sudo nano .env`
+
+ _Add following configuration_
+    
+    APP_ENV=local
+    APP_DEBUG=true
+    APP_KEY=base64:aub+Jg1OfZ8FKLV/FL7zbYFx0abmMkl1wU3UC0h3XEE=
+    APP_URL=http://localhost
+    
+    DB_CONNECTION=mysql
+    DB_HOST=localhost
+    DB_PORT=3306
+    DB_DATABASE=dbname
+    DB_USERNAME=dbuser
+    DB_PASSWORD=dbpassword
+    
+    CACHE_DRIVER=file
+    SESSION_DRIVER=file
+    QUEUE_DRIVER=sync
+    
+    REDIS_HOST=127.0.0.1
+    REDIS_PASSWORD=null
+    REDIS_PORT=6379
+    
+    MAIL_DRIVER=smtp
+    MAIL_HOST=mailtrap.io
+    MAIL_PORT=2525
+    MAIL_USERNAME=null
+    MAIL_PASSWORD=null
+    MAIL_ENCRYPTION=null
+    
+_Then cd into project direcoty and run the below command_
+- `php artisan migrate`    
+    
+
+
+
+
+
+
+
+
